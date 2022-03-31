@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DirectoryPlaceHolderView: View {
+    @State private var animate = false
 
     var body: some View {
         VStack {
@@ -48,7 +49,14 @@ struct DirectoryPlaceHolderView: View {
                 .padding(.bottom, 4)
             }
         }
+        .scaleEffect(animate ? 0.9 : 1.0)
+        .animation(Animation.easeInOut(duration: 2).repeatForever(autoreverses: true), value: animate)
         .redacted(reason: .placeholder)
+    .onAppear {
+        withAnimation() {
+            animate = true
+        }
+    }
     }
 }
 

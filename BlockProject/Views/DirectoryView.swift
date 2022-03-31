@@ -18,7 +18,7 @@ struct DirectoryView: View {
     var body: some View {
         NavigationView {
             VStack {
-                // if have an error we're show ErrorView in place.
+                // if we have an error we're show ErrorView in place.
                 switch employeeData.showErrorAlert {
                 case true:
                     ErrorView(errorMessage: employeeData.errorMessage)
@@ -28,16 +28,11 @@ struct DirectoryView: View {
                         List {
                             VStack {
                                 DirectoryPlaceHolderView()
-                                    .scaleEffect(animate ? 0.9 : 1.0)
-                                    .animation(Animation.easeInOut(duration: 2).repeatForever(autoreverses: true), value: animate)
                                 Text("*Waiting on Data...*")
                                     .font(.title2)
-                                    .scaleEffect(animate ? 0.9 : 1.0)
-                                    .animation(Animation.easeInOut(duration: 2).repeatForever(autoreverses: true), value: animate)
-
                             }
                             .onAppear {
-                                withAnimation {
+                                withAnimation() {
                                     animate = true
                                 }
                             }
