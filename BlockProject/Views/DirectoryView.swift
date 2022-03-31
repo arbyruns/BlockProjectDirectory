@@ -44,37 +44,47 @@ struct DirectoryView: View {
                     else {
                             // we have the directory and show the view
                             VStack {
-                                SearchFieldView(text: $searchText)
-                                List {
-                                    ForEach(employeeData.employeesData.filter({ searchText.isEmpty ? true : $0.fullName.lowercased().contains(searchText.lowercased()) }), id: \.uuid) { employee in
-                                            EmployeeView(employee: employee)
-                                                .padding(.bottom, 30)
-                                    }
-                                    .listRowSeparator(.hidden)
-                                }
-                                .gesture(DragGesture().onChanged { gesture in
-                                    hideKeyboard()
+                                    SearchFieldView(text: $searchText)
+                                ZStack {
+                                    Image(searchText.isEmpty ? "" : "Asset 16")
+                                    List {
+                                            ForEach(employeeData.employeesData.filter({ searchText.isEmpty ? true : $0.fullName.lowercased().contains(searchText.lowercased()) }), id: \.uuid) { employee in
+                                                    EmployeeView(employee: employee)
+                                                        .padding(.bottom, 30)
+                                                        .listRowBackground(Color.clear)
+                                            }
+                                            .listRowSeparator(.hidden)
+                                        }
+                                        .gesture(DragGesture().onChanged { gesture in
+                                            hideKeyboard()
 
-                                })
-                            .refreshable {
-                                withAnimation {
-                                    employeeData.employeesData = []
-                                }
-                                // this is put in place just to show the placeholder
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                                    Task {
-                                        employeeData.employeesData = await employeeData.fetchEmployees()
+                                        })
+                                    .refreshable {
+                                        withAnimation {
+                                            employeeData.employeesData = []
+                                        }
+                                        // this is put in place just to show the placeholder
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                                            Task {
+                                                employeeData.employeesData = await employeeData.fetchEmployees()
+                                            }
+                                        }
                                     }
+                                .listStyle(.plain)
+
                                 }
                             }
-                            .listStyle(.plain)
-                        }
+                            .onAppear {
+                                UITableView.appearance().backgroundColor = .clear
+                            }
+                        
                     }
                 }
             }
             .task {
                 employeeData.employeesData = await employeeData.fetchEmployees()
             }
+            
             .navigationTitle("Employee Directory")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
