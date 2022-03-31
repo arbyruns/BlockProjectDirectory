@@ -120,4 +120,3 @@ struct EmployeeView_Previews: PreviewProvider {
             .colorScheme(.dark)
     }
 }
-
