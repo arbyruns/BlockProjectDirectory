@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		54BD4D2127F5FF3900A2FBB7 /* BlockProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BD4D2027F5FF3900A2FBB7 /* BlockProjectTests.swift */; };
+		54BD4D2827F60EB000A2FBB7 /* SearchFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BD4D2727F60EB000A2FBB7 /* SearchFieldView.swift */; };
 		54C98F8227F4B0BE000BA8A9 /* BlockProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C98F8127F4B0BE000BA8A9 /* BlockProjectApp.swift */; };
 		54C98F8427F4B0BE000BA8A9 /* DirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C98F8327F4B0BE000BA8A9 /* DirectoryView.swift */; };
 		54C98F8627F4B0C1000BA8A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54C98F8527F4B0C1000BA8A9 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		54BD4D1E27F5FF3900A2FBB7 /* BlockProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlockProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54BD4D2027F5FF3900A2FBB7 /* BlockProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockProjectTests.swift; sourceTree = "<group>"; };
+		54BD4D2727F60EB000A2FBB7 /* SearchFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFieldView.swift; sourceTree = "<group>"; };
 		54C98F7E27F4B0BE000BA8A9 /* BlockProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlockProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54C98F8127F4B0BE000BA8A9 /* BlockProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockProjectApp.swift; sourceTree = "<group>"; };
 		54C98F8327F4B0BE000BA8A9 /* DirectoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryView.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				54F2789E27F5DC550095CC23 /* DirectoryPlaceHolderView.swift */,
 				54F278A027F5DC8A0095CC23 /* EmployeeMoreInfoView.swift */,
 				54F278A227F5DCD30095CC23 /* EmployeeView.swift */,
+				54BD4D2727F60EB000A2FBB7 /* SearchFieldView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				54C98F8427F4B0BE000BA8A9 /* DirectoryView.swift in Sources */,
 				54F2789F27F5DC550095CC23 /* DirectoryPlaceHolderView.swift in Sources */,
 				54C98F9127F4BC3A000BA8A9 /* Employees.swift in Sources */,
+				54BD4D2827F60EB000A2FBB7 /* SearchFieldView.swift in Sources */,
 				54F278A127F5DC8A0095CC23 /* EmployeeMoreInfoView.swift in Sources */,
 				54F2789A27F5DAFB0095CC23 /* EmployeesViewModel.swift in Sources */,
 				54C98F8227F4B0BE000BA8A9 /* BlockProjectApp.swift in Sources */,
