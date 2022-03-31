@@ -12,7 +12,7 @@ struct EmployeeView: View {
     @Environment(\.colorScheme) var colorScheme
 
     let employee: Employee
-    let testClass = EmployeesModel()
+    let employeesModel = EmployeesModel()
     @State var showMoreContactInfo = false
 
     var body: some View {
@@ -53,7 +53,7 @@ struct EmployeeView: View {
                                     HStack {
                                         Image(systemName: "phone")
                                             .font(.subheadline)
-                                        Text(testClass.format(sourcePhoneNumber: employee.phoneNumber ?? "") ?? "")
+                                        Text(employeesModel.format(sourcePhoneNumber: employee.phoneNumber ?? "") ?? "")
                                             .font(.subheadline)
                                             .foregroundColor(.secondary)
                                     }
@@ -100,8 +100,8 @@ struct EmployeeView: View {
                             VStack(alignment: .leading) {
                                 Divider()
                                     .padding(.horizontal)
-                                EmployeeMoreInfoView(infoText1: "Employee Type:", infoText2: "Full Time")
-                                EmployeeMoreInfoView(infoText1: "Biography", infoText2: employee.biography ?? "")
+                                EmployeeMoreInfoView(infoText1: "Employee Type:", infoText2: employeesModel.getStatus(employeeType: employee.employeeType))
+                                EmployeeMoreInfoView(infoText1: "Biography:", infoText2: employee.biography ?? "")
                                 Spacer()
                             }
                             .transition(.asymmetric(insertion: .fade(duration: 0.9), removal: .fade))
@@ -115,8 +115,9 @@ struct EmployeeView: View {
 
 struct EmployeeView_Previews: PreviewProvider {
     static var previews: some View {
-        EmployeeView(employee: Employee(uuid: "", fullName: "Full Name", phoneNumber: "12343534342", emailAddress: "foo@email.com", biography: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", photoURLSmall: "", photoURLLarge: "", team: "Point of Sale", employeeType: EmployeeType.contractor))
+        EmployeeView(employee: Employee(uuid: "", fullName: "Full Name", phoneNumber: "12343534342", emailAddress: "foo@email.com", biography: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit", photoURLSmall: "", photoURLLarge: "", team: "Point of Sale", employeeType: EmployeeType.contractor))
         EmployeeView(employee: Employee(uuid: "", fullName: "Full Name", phoneNumber: "12343534342", emailAddress: "foo@email.com", biography: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", photoURLSmall: "", photoURLLarge: "", team: "Point of Sale", employeeType: EmployeeType.contractor))
             .colorScheme(.dark)
     }
 }
+
