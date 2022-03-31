@@ -14,6 +14,7 @@ struct DirectoryView: View {
 
     @State private var searchText = ""
     @State private var animate = false
+    @State var scaleCard = false
 
     var body: some View {
         NavigationView {
@@ -47,20 +48,26 @@ struct DirectoryView: View {
 
                     }
                     else {
-                        // we have the directory and show the view
-                        VStack {
-                            SearchFieldView(text: $searchText)
-                            List {
-                                ForEach(employeeData.employeesData.filter({ searchText.isEmpty ? true : $0.fullName.lowercased().contains(searchText.lowercased()) }), id: \.uuid) { employee in
-                                    EmployeeView(employee: employee)
-                                        .padding(.bottom, 30)
+                        GeometryReader { geo in
+                            // we have the directory and show the view
+                            VStack {
+                                SearchFieldView(text: $searchText)
+                                List {
+                                    ForEach(employeeData.employeesData.filter({ searchText.isEmpty ? true : $0.fullName.lowercased().contains(searchText.lowercased()) }), id: \.uuid) { employee in
+                                        GeometryReader { view in
+                                            EmployeeView(employee: employee)
+                                                .padding(.bottom, 30)
+                                                .scaleEffect(scaleValue(mainFrame: geo.frame(in: .global).minY, minY: view.frame(in: .global).minY), anchor: .center)
+                                                .opacity(Double(scaleValue(mainFrame: geo.frame(in: .global).minY, minY: view.frame(in: .global).minY)))
+                                        }
+                                        .frame(height: 215)
+                                    }
+                                    .listRowSeparator(.hidden)
                                 }
-                                .listRowSeparator(.hidden)
-                            }
                                 .gesture(DragGesture().onChanged { gesture in
                                     hideKeyboard()
 
-                            })
+                                })
                             .refreshable {
                                 withAnimation {
                                     employeeData.employeesData = []
@@ -74,6 +81,7 @@ struct DirectoryView: View {
                             }
                             .listStyle(.plain)
                         }
+                    }
                     }
                 }
             }
@@ -143,6 +151,17 @@ struct DirectoryView: View {
             }
         }
     }
+
+    func scaleValue(mainFrame: CGFloat, minY: CGFloat) -> CGFloat {
+        let scale = (minY - 5) / mainFrame
+
+        if scale > 1 {
+            return 1
+        } else {
+            return scale
+        }
+    }
+
 }
 
 
