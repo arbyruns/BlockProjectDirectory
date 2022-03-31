@@ -15,10 +15,12 @@ class EmployeesModel: ObservableObject {
     @Published var errorMessage = ""
 
     // sample URL for testing
-    var directoryURL = "https://s3.amazonaws.com/sq-mobile-interview/employees.json"
-    var malformedURL = "https://s3.amazonaws.com/sq-mobile-interview/employees_malformed.json"
-    var emptyURL = "https://s3.amazonaws.com/sq-mobile-interview/employees_empty.json"
+    let workingURL = "https://s3.amazonaws.com/sq-mobile-interview/employees.json"
+    let malformedURL = "https://s3.amazonaws.com/sq-mobile-interview/employees_malformed.json"
+    let emptyURL = "https://s3.amazonaws.com/sq-mobile-interview/employees_empty.json"
 
+    var directoryURL = "https://s3.amazonaws.com/sq-mobile-interview/employees.json"
+    
     /// Used to fetch employee directory
     /// - Returns: Returns system employee directory
     func fetchEmployees() async -> [Employee] {
