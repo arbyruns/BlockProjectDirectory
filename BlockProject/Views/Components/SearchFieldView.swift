@@ -34,6 +34,7 @@ struct SearchFieldView: View {
                             Button(action: {
                                 withAnimation {
                                 self.text = ""
+                                    hideKeyboard()
                                 }
                             }) {
                                 Image(systemName: "multiply.circle.fill")
@@ -49,6 +50,7 @@ struct SearchFieldView: View {
                     withAnimation {
                         self.isEditing = false
                         self.text = ""
+                        hideKeyboard()
                     }
 
                 }) {
