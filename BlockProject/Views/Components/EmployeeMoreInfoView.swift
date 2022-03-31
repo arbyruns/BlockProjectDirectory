@@ -17,11 +17,13 @@ struct EmployeeMoreInfoView: View {
         VStack(alignment: .leading) {
             Text(infoText1)
                 .fontWeight(.semibold)
-                .font(.caption)
+                .font(.subheadline)
             Text(infoText2)
-                .font(.caption)
+                .font(.subheadline)
+                .fontWeight(.thin)
                 .lineLimit(4)
                 .padding(.vertical, 2)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .padding(4)
     }
