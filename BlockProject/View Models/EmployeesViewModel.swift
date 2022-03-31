@@ -115,6 +115,22 @@ class EmployeesModel: ObservableObject {
            return leadingOne + areaCode + prefix + "-" + suffix
        }
 
+
+    /// Returns employee type
+    /// - Returns: String as Contractor, Full Time, or Part Time
+    func getStatus(employeeType: EmployeeType) -> String {
+
+        switch employeeType {
+        case .contractor:
+            return "Contractor"
+        case .fullTime:
+            return "Full Time"
+        case .partTime:
+            return "Part Time"
+        }
+    }
+
+
 }
 
 extension String {
