@@ -5,7 +5,7 @@ xCode 13.3
 
 ## Steps to run the app
 
-Project can be ran within xCode simulator or on a device by downloading the project.
+Project can be ran within xCode simulator or on a device by downloading the project. For the purpose of this project I included a Update URL in the navigation bar for testing of a `Working URL`, `Malformed URL`, & `Empty URL`.
 
 ## What areas of the app did you focus on?
 
