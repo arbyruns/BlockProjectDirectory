@@ -10,7 +10,6 @@ import SwiftUI
 struct DirectoryPlaceHolderView: View {
 
     var body: some View {
-
         VStack {
             HStack {
                 Circle()
