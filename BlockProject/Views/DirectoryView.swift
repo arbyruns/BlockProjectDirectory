@@ -11,7 +11,10 @@ import SwiftUI
 struct DirectoryView: View {
 
     @StateObject var employeeData = EmployeesModel()
-    @State var loadingData = "Loading Data"
+
+    @State private var searchText = ""
+    @State private var animate = false
+
 
     var body: some View {
             NavigationView {
@@ -26,9 +29,19 @@ struct DirectoryView: View {
                                 List {
                                     VStack {
                                         DirectoryPlaceHolderView()
+                                            .scaleEffect(animate ? 0.9 : 1.0)
+                                            .animation(Animation.easeInOut(duration: 2).repeatForever(autoreverses: true), value: animate)
                                         Text("*Loading Data...*")
                                             .font(.title2)
+                                            .scaleEffect(animate ? 0.9 : 1.0)
+                                            .animation(Animation.easeInOut(duration: 2).repeatForever(autoreverses: true), value: animate)
+
                                     }
+                                    .onAppear {
+                                        withAnimation {
+                                            animate = true
+                                        }
+                                        }
                                 }
                             } else if employeeData.showErrorAlert {
                                 ErrorView(errorMessage: employeeData.errorMessage)
@@ -37,9 +50,10 @@ struct DirectoryView: View {
                             else {
                                 // we have the directory and show the view
                                 VStack {
+                                    SearchFieldView(text: $searchText)
                                     List {
 
-                                        ForEach(employeeData.employeesData, id: \.uuid) { employee in
+                                        ForEach(employeeData.employeesData.filter({ searchText.isEmpty ? true : $0.fullName.lowercased().contains(searchText.lowercased()) }), id: \.uuid) { employee in
                                             EmployeeView(employee: employee)
                                                 .padding(.bottom, 30)
                                         }
@@ -64,6 +78,7 @@ struct DirectoryView: View {
                     .task {
                         employeeData.employeesData = await employeeData.fetchEmployees()
                     }
+                    .navigationTitle("Employee Directory")
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button("Refresh") {
@@ -79,12 +94,11 @@ struct DirectoryView: View {
                             }
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
-
                             Menu("Update URL") {
                                 Button("Working URL") {
                                     withAnimation {
                                         employeeData.employeesData = []
-                                        employeeData.directoryURL = "https://s3.amazonaws.com/sq-mobile-interview/employees.json"
+                                        employeeData.directoryURL = employeeData.workingURL
                                     }
                                     // this is put in place just to show the placeholder
                                         Task {
@@ -94,9 +108,8 @@ struct DirectoryView: View {
                                 }
                                 Button("Malformed URL") {
                                     withAnimation {
-                                        
                                         employeeData.employeesData = []
-                                        employeeData.directoryURL = "https://s3.amazonaws.com/sq-mobile-interview/employees_malformed.json"
+                                        employeeData.directoryURL = employeeData.malformedURL
                                     }
                                     // this is put in place just to show the placeholder
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
@@ -109,7 +122,7 @@ struct DirectoryView: View {
                                 Button("Empty URL") {
                                     withAnimation {
                                         employeeData.employeesData = []
-                                        employeeData.directoryURL = "https://s3.amazonaws.com/sq-mobile-interview/employees_empty.json"
+                                        employeeData.directoryURL = employeeData.emptyURL
                                     }
                                     // this is put in place just to show the placeholder
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
